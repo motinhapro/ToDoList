@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 
-public class TodoUpdateDTO {
+public class TodoPostDTO {
 
     private String title;
     private String description;
@@ -22,7 +22,7 @@ public class TodoUpdateDTO {
     private Priority priority;
     private LocalDateTime dueDate;
 
-    public TodoUpdateDTO(Todo todo) {
+    public TodoPostDTO(Todo todo) {
         this.title = todo.getTitle();
         this.description = todo.getDescription();
         this.status = todo.getStatus();

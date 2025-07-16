@@ -1,6 +1,7 @@
 package com.edumota.todolist.services;
 
 import com.edumota.todolist.domain.Todo;
+import com.edumota.todolist.dto.TodoPostDTO;
 import com.edumota.todolist.dto.TodoUpdateDTO;
 import com.edumota.todolist.repositories.TodoRepository;
 import com.edumota.todolist.services.exceptions.ResourceNotFoundException;
@@ -31,5 +32,9 @@ public class TodoService {
         todo.setPriority(newTodo.getPriority());
         todo.setDueDate(newTodo.getDueDate());
         return repository.save(todo);
+    }
+
+    public Todo insert(TodoPostDTO todo) {
+        return repository.save(new Todo(null, todo.getTitle(), todo.getDescription(), todo.getStatus(), todo.getPriority(), todo.getDueDate()));
     }
 }
