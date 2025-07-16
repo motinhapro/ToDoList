@@ -1,5 +1,7 @@
 package com.edumota.todolist.domain;
 
+import com.edumota.todolist.enums.Priority;
+import com.edumota.todolist.enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,6 +21,8 @@ public class Todo {
     @Column(nullable = false)
     private String title;
     private String description;
+    private Status status;
+    private Priority priority;
     private LocalDateTime createdAt;
     private LocalDateTime dueDate;
 
@@ -26,10 +30,12 @@ public class Todo {
         this.createdAt = LocalDateTime.now();
     }
 
-    public Todo(Long id, String title, String description, LocalDateTime dueDate) {
+    public Todo(Long id, String title, String description, Status status, Priority priority, LocalDateTime dueDate) {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.status = status;
+        this.priority = priority;
         this.createdAt = LocalDateTime.now();
         this.dueDate = dueDate;
     }
