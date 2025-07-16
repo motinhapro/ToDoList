@@ -1,13 +1,13 @@
 package com.edumota.todolist.services;
 
 import com.edumota.todolist.domain.Todo;
+import com.edumota.todolist.dto.TodoUpdateDTO;
 import com.edumota.todolist.repositories.TodoRepository;
 import com.edumota.todolist.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TodoService {
@@ -21,5 +21,15 @@ public class TodoService {
 
     public Todo findById(Long id) {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Todo with id " + id + " not found"));
+    }
+
+    public Todo update(Long id, TodoUpdateDTO newTodo) {
+        Todo todo = findById(id);
+        todo.setTitle(newTodo.getTitle());
+        todo.setDescription(newTodo.getDescription());
+        todo.setStatus(newTodo.getStatus());
+        todo.setPriority(newTodo.getPriority());
+        todo.setDueDate(newTodo.getDueDate());
+        return repository.save(todo);
     }
 }
