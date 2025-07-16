@@ -24,5 +24,10 @@ public class TodoDTO {
     private LocalDateTime createdAt;
 
     public TodoDTO(Todo x) {
+        this.title = x.getTitle();
+        this.description = x.getDescription();
+        this.status = x.getStatus();
+        this.priority = x.getPriority();
+        this.createdAt = x.getCreatedAt();
     }
 }
