@@ -1,6 +1,7 @@
 package com.edumota.todolist.controllers;
 
 import com.edumota.todolist.domain.Todo;
+import com.edumota.todolist.dto.TodoDTO;
 import com.edumota.todolist.services.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,13 +21,12 @@ public class TodoController {
     private TodoService service;
 
     @GetMapping
-    public ResponseEntity<List<Todo>> findAll() {
-        return ResponseEntity.ok().body(service.findAll());
+    public ResponseEntity<List<TodoDTO>> findAll() {
+        return ResponseEntity.ok().body(service.findAll().stream().map(TodoDTO::new).toList());
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Todo> findById(@PathVariable Long id) {
-        return ResponseEntity.ok().body(service.findById(id));
+    public ResponseEntity<TodoDTO> findById(@PathVariable Long id) {
+        return ResponseEntity.ok().body(new TodoDTO(service.findById(id)));
     }
-
 }
