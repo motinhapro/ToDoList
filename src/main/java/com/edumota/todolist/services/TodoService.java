@@ -37,4 +37,9 @@ public class TodoService {
     public Todo insert(TodoPostDTO todo) {
         return repository.save(new Todo(null, todo.getTitle(), todo.getDescription(), todo.getStatus(), todo.getPriority(), todo.getDueDate()));
     }
+
+    public void delete(Long id) {
+        Todo todo = findById(id);
+        repository.deleteById(id);
+    }
 }

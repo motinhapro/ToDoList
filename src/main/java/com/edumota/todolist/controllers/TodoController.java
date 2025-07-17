@@ -37,4 +37,10 @@ public class TodoController {
     public ResponseEntity<TodoDTO> insert(@RequestBody TodoPostDTO todo) {
         return ResponseEntity.ok().body(new TodoDTO(service.insert(todo)));
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

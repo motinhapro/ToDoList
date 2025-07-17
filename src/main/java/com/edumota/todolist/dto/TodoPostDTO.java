@@ -3,7 +3,6 @@ package com.edumota.todolist.dto;
 import com.edumota.todolist.domain.Todo;
 import com.edumota.todolist.enums.Priority;
 import com.edumota.todolist.enums.Status;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
