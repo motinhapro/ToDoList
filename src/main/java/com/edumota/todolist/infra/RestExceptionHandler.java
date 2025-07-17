@@ -42,4 +42,13 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<StandardError> illegalArgumentHandler(ResourceNotFoundException e, HttpServletRequest request) {
+        String error = "Invalid Argument";
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
 }

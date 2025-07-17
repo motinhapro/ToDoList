@@ -3,6 +3,7 @@ package com.edumota.todolist.controllers;
 import com.edumota.todolist.dto.TodoDTO;
 import com.edumota.todolist.dto.TodoPostDTO;
 import com.edumota.todolist.dto.TodoUpdateDTO;
+import com.edumota.todolist.enums.Priority;
 import com.edumota.todolist.services.TodoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,16 @@ public class TodoController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<TodoDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok().body(new TodoDTO(service.findById(id)));
+    }
+
+    @GetMapping(value = "/titlesearch")
+    public ResponseEntity<List<TodoDTO>> findByTitle(@RequestParam String title) {
+       return ResponseEntity.ok().body(service.findByTitle(title).stream().map(TodoDTO::new).toList());
+    }
+
+    @GetMapping(value = "/priority")
+    public ResponseEntity<List<TodoDTO>> findByPriority(@RequestParam String value) {
+        return ResponseEntity.ok().body(service.findByPriority(value).stream().map(TodoDTO::new).toList());
     }
 
     @PutMapping(value = "/{id}")

@@ -3,6 +3,7 @@ package com.edumota.todolist.services;
 import com.edumota.todolist.domain.Todo;
 import com.edumota.todolist.dto.TodoPostDTO;
 import com.edumota.todolist.dto.TodoUpdateDTO;
+import com.edumota.todolist.enums.Priority;
 import com.edumota.todolist.repositories.TodoRepository;
 import com.edumota.todolist.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,15 @@ public class TodoService {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Todo with id " + id + " not found"));
     }
 
+    public List<Todo> findByTitle(String title) {
+        return repository.findByTitleContainingIgnoreCase(title);
+    }
+
+    public List<Todo> findByPriority(String value) {
+        Priority priority = Priority.valueOf(value.toUpperCase());
+        return repository.findByPriority(priority);
+    }
+
     public Todo update(Long id, TodoUpdateDTO newTodo) {
         Todo todo = findById(id);
         todo.setTitle(newTodo.getTitle());
@@ -42,4 +52,5 @@ public class TodoService {
         Todo todo = findById(id);
         repository.deleteById(id);
     }
+
 }
