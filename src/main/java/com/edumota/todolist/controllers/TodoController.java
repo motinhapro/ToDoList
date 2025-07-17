@@ -4,9 +4,9 @@ import com.edumota.todolist.dto.TodoDTO;
 import com.edumota.todolist.dto.TodoPostDTO;
 import com.edumota.todolist.dto.TodoUpdateDTO;
 import com.edumota.todolist.services.TodoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,12 +29,12 @@ public class TodoController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<TodoDTO> update(@PathVariable Long id, @RequestBody TodoUpdateDTO todo) {
+    public ResponseEntity<TodoDTO> update(@PathVariable Long id,@Valid @RequestBody TodoUpdateDTO todo) {
         return ResponseEntity.ok().body(new TodoDTO(service.update(id, todo)));
     }
 
     @PostMapping
-    public ResponseEntity<TodoDTO> insert(@RequestBody TodoPostDTO todo) {
+    public ResponseEntity<TodoDTO> insert(@Valid @RequestBody TodoPostDTO todo) {
         return ResponseEntity.ok().body(new TodoDTO(service.insert(todo)));
     }
 
